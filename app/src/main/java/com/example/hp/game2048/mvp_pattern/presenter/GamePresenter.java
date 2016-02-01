@@ -2,6 +2,7 @@ package com.example.hp.game2048.mvp_pattern.presenter;
 
 import android.util.Log;
 
+import com.example.hp.game2048.R;
 import com.example.hp.game2048.mvp_pattern.model.Model;
 import com.example.hp.game2048.mvp_pattern.view.IGameView;
 import java.util.Random;
@@ -20,6 +21,38 @@ public class GamePresenter implements IGamePresenter{
     private void initMap() {
         random = new Random();
         generateTwoNumber();
+    }
+
+    public int getIdFromNum(int num) {
+        switch (num) {
+            case 0:
+                return R.drawable.num_0;
+            case 2:
+                return R.drawable.num_2;
+            case 4:
+                return R.drawable.num_4;
+            case 8:
+                return R.drawable.num_8;
+            case 16:
+                return R.drawable.num_16;
+            case 32:
+                return R.drawable.num_32;
+            case 64:
+                return R.drawable.num_64;
+            case 128:
+                return R.drawable.num_128;
+            case 256:
+                return R.drawable.num_256;
+            case 512:
+                return R.drawable.num_512;
+            case 1024:
+                return R.drawable.num_1024;
+            case 2048:
+                return R.drawable.num_2048;
+            default:
+                break;
+        }
+        return -1;
     }
 
     public int getStep(){

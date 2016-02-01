@@ -7,6 +7,7 @@ public interface IGamePresenter {
     int getPosNum(int position);
     int getStep();
     void move(int direction);
+    int getIdFromNum(int num);
     int BLANK = 0;
     int MOVE_UP = 0, MOVE_DOWN = 1, MOVE_LEFT = 2, MOVE_RIGHT = 3;
 }
