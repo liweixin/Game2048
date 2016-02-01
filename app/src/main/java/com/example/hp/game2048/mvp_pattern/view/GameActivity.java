@@ -1,44 +1,22 @@
-package com.example.hp.game2048;
+package com.example.hp.game2048.mvp_pattern.view;
 
-import android.app.Activity;
-import android.gesture.Gesture;
-import android.gesture.GestureOverlayView;
-import android.support.v7.app.AppCompatActivity;
+/**
+ * Created by lwx on 2016/2/1.
+ */
+
 import android.os.Bundle;
-import android.view.GestureDetector;
-import android.view.GestureDetector.OnGestureListener;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.example.hp.game2048.R;
+import com.example.hp.game2048.mvp_pattern.presenter.GamePresenter;
 
-public class MainActivity extends AppCompatActivity /*implements GestureOverlayView.OnGestureListener*/{
-
-  /*  @Override
-    public void onGesture(GestureOverlayView overlay, MotionEvent event){
-
-    }
-
-    @Override
-    public void onGestureCancelled(GestureOverlayView overlay, MotionEvent event){
-
-    }
-
-    @Override
-    public void onGestureEnded(GestureOverlayView overlay, MotionEvent event){
-
-    }
-    @Override
-    public void onGestureStarted(GestureOverlayView overlay, MotionEvent event){
-
-    }*/
+public class GameActivity extends AppCompatActivity implements IGameView{
     private Button[] button = new Button[4];
-
-    private Logic logic;
     private TextView step;
     private ImageView[] imageView = new ImageView[16];
     public final int[] gridToId = {R.id.grid_0, R.id.grid_1, R.id.grid_2, R.id.grid_3,
@@ -76,10 +54,10 @@ public class MainActivity extends AppCompatActivity /*implements GestureOverlayV
         }
         return -1;
     }
-    private void render(){
+    public void render(){
         for(int i=0; i<16; i++)
-            imageView[i].setImageResource(getIdFromNum(logic.getPosNum(i)));
-        step.setText(String.valueOf(logic.getStep()));
+            imageView[i].setImageResource(getIdFromNum(mGamePresenter.getPosNum(i)));
+        step.setText(String.valueOf(mGamePresenter.getStep()));
     }
 
     private void imageviewInit(){
@@ -97,12 +75,13 @@ public class MainActivity extends AppCompatActivity /*implements GestureOverlayV
             button[id].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    logic.move(id);
-                    render();
+                    mGamePresenter.move(id);
                 }
             });
         }
     }
+
+    GamePresenter mGamePresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +90,7 @@ public class MainActivity extends AppCompatActivity /*implements GestureOverlayV
         imageviewInit();
         buttonInit();
         step = (TextView) findViewById(R.id.step);
-        logic = new Logic();
+        mGamePresenter = new GamePresenter(this);
         render();
     }
 

@@ -1,4 +1,4 @@
-package com.example.hp.game2048;
+package com.example.hp.game2048.old_way;
 
 import android.util.Log;
 
