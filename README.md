@@ -1,2 +1,2 @@
 # Game2048
-Developing...
+Refactoring with MVP constructure
